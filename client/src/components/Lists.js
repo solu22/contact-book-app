@@ -6,29 +6,48 @@ import {
   Button,
 } from "@material-ui/core";
 
+import { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { removeContact, fetchContact, updateContact } from "../Redux/actions";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%"
+    width: "100%",
   },
 }));
 
-const Lists = ({ user}) => {
+const Lists = ({ users }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContact());
+  }, [dispatch]);
+
+
+
+
 
   return (
     <List className={classes.root}>
-      <ListItem key = {user.name}>
-        <p>{user.name}</p>
-        <p>{user.number}</p>
-        <ListItemSecondaryAction>
-          <Button>Edit</Button>
-          <Button color="primary" variant="contained">
-            Remove
-          </Button>
-        </ListItemSecondaryAction>
-      </ListItem>
+      {users &&
+        users.map((user) => (
+          <ListItem key={user._id}>
+            <p>{user.name}</p>
+            <p>{user.number}</p>
+            <ListItemSecondaryAction>
+              <Button onClick ={()=> editItem(user._id)}>Edit</Button>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={() => dispatch(removeContact(user._id))}
+              >
+                Remove
+              </Button>
+            </ListItemSecondaryAction>
+          </ListItem>
+        ))}
     </List>
   );
 };
