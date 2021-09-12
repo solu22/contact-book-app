@@ -12,15 +12,17 @@ import {
 import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
 
 /*custom Styles */
-import { paperStyle, buttonStyle, errorMessageStyle } from "../styles/allStyles";
+import {
+  paperStyle,
+  buttonStyle,
+  errorMessageStyle,
+} from "../styles/allStyles";
 
 import Lists from "./Lists";
 import { useSelector, useDispatch } from "react-redux";
 import { addContact, updateContact, fetchContact } from "../Redux/actions";
 
 import Search from "./Search";
-
-
 
 const PhoneBook = () => {
   const {
@@ -141,7 +143,7 @@ const PhoneBook = () => {
               </div>
             </form>
 
-            {loading && <p style = {{textAlign: "center"}}>Loading Data</p>}
+            {loading && <p style={{ textAlign: "center" }}>Loading Data</p>}
             <Lists users={filteredUser} />
           </Paper>
         </Grid>
