@@ -69,6 +69,7 @@ const PhoneBook = () => {
         ) {
           const updatedPerson = { ...existingUser, number };
           dispatch(updateContact(updatedPerson));
+          reset();
         }
         return;
       }
@@ -76,11 +77,12 @@ const PhoneBook = () => {
       if (existingUser?.number === number) {
         if (
           window.confirm(
-            `${number} is already added to phonebook, replace old name with new one ? `
+            `phone number ${number} is already added to phonebook, replace old name with new one ? `
           )
         ) {
           const updatedPerson = { ...existingUser, name };
           dispatch(updateContact(updatedPerson));
+          reset();
         }
         return;
       }
